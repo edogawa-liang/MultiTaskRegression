@@ -45,11 +45,12 @@ python main.py --target_column target --input_file data.csv
 - `--seed` (int, 選填): 設置隨機種子以獲得一致的結果。預設值為 `None`。
 
 
+## Example
 ```
-python main.py --input_file 'data.csv' --target_column '學期成績(原始)'  --plot_col all --time_column Name --preserve_vars HW1 --base_folder example --seed 123
+python main.py --input_file "data/house_price.csv" --target_column price  --time_column date --preserve_vars bedrooms,view  --base_folder example/house --seed 123
 ```
 ```
-Example
+example/house
 ├── analysis.log (資料分析日誌)
 ├── fig (資料視覺化)
 ├── result
@@ -59,3 +60,6 @@ Example
 └── saved_model (訓練完成的模型)
 ```
 
+## Notice
+- 請確保資料集中不包含帶有Index資訊的欄位
+- 若為時間序列資料，資料需要按照時間排列

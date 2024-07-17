@@ -64,7 +64,7 @@ def _plot_time(X, y, time_column, target, base_folder):
     繪製時間變數與 y 的關係
     """
     plt.figure(figsize=(8, 4))
-    plt.plot_date(X[time_column], y, '-')
+    plt.plot_date(y, '-')
     plt.title(f'時間與 {target} 折線圖', fontproperties=fontset)
     plt.xlabel(time_column, fontproperties=fontset)
     plt.ylabel(target, fontproperties=fontset)

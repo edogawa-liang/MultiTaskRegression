@@ -18,6 +18,7 @@ class FeatureSelector(BaseEstimator, TransformerMixin):
         self.preserve_vars = preserve_vars if preserve_vars is not None else [] # 必須保留的變數
 
     def _backward_selection(self, X, y):
+        X, y = X.align(y, join='inner', axis=0)
         features = list(X.columns)
         while len(features) > 0:
             X_with_const = sm.add_constant(X[features])

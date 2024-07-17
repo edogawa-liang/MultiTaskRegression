@@ -1,0 +1,70 @@
+2024-07-18 00:09:42,248 - INFO - 繪製相關性熱圖至 example/house/fig/corr_heatmap.png
+2024-07-18 00:09:42,439 - INFO - 繪製bedrooms與price 長條圖至 example/house/fig/bedrooms_price.png
+2024-07-18 00:09:42,544 - INFO - 繪製bathrooms與price 散佈圖至 example/house/fig/bathrooms_price.png
+2024-07-18 00:09:42,648 - INFO - 繪製sqft_living與price 散佈圖至 example/house/fig/sqft_living_price.png
+2024-07-18 00:09:42,749 - INFO - 繪製sqft_lot與price 散佈圖至 example/house/fig/sqft_lot_price.png
+2024-07-18 00:09:42,882 - INFO - 繪製floors與price 長條圖至 example/house/fig/floors_price.png
+2024-07-18 00:09:42,988 - INFO - 繪製waterfront與price 長條圖至 example/house/fig/waterfront_price.png
+2024-07-18 00:09:43,133 - INFO - 繪製view與price 長條圖至 example/house/fig/view_price.png
+2024-07-18 00:09:43,252 - INFO - 繪製condition與price 長條圖至 example/house/fig/condition_price.png
+2024-07-18 00:09:43,351 - INFO - 繪製sqft_above與price 散佈圖至 example/house/fig/sqft_above_price.png
+2024-07-18 00:09:43,455 - INFO - 繪製sqft_basement與price 散佈圖至 example/house/fig/sqft_basement_price.png
+2024-07-18 00:09:43,552 - INFO - 繪製yr_built與price 散佈圖至 example/house/fig/yr_built_price.png
+2024-07-18 00:09:43,655 - INFO - 繪製yr_renovated與price 散佈圖至 example/house/fig/yr_renovated_price.png
+2024-07-18 00:09:43,657 - INFO - Data split into features and target.
+2024-07-18 00:09:43,657 - INFO - Performing random split...
+2024-07-18 00:09:43,658 - INFO - 隨機劃分資料集，測試集比例為 0.2 
+2024-07-18 00:09:43,662 - INFO - 將名目變數 ['city'] 做 One-Hot Encoding
+2024-07-18 00:09:43,756 - INFO - 使用 mean 補遺失值
+2024-07-18 00:09:43,784 - INFO - 使用 StandardScaler() 做正規化
+2024-07-18 00:09:44,054 - INFO - 使用 model 選擇特徵
+2024-07-18 00:09:44,054 - INFO - 重要變數 'view' 不在選擇的特徵中，已加入。
+2024-07-18 00:09:44,054 - INFO - 最終選擇特徵: ['sqft_lot', 'city_Bothell', 'city_Issaquah', 'city_Kent', 'yr_built', 'bedrooms', 'city_Sammamish', 'city_Seattle', 'city_Snoqualmie', 'city_Kirkland', 'sqft_above', 'city_Woodinville', 'sqft_living', 'bathrooms', 'city_Redmond', 'city_Auburn', 'floors', 'city_Enumclaw', 'city_Carnation', 'city_Mercer Island', 'view']
+2024-07-18 00:09:44,054 - INFO - 加入時間序列模型
+2024-07-18 00:09:44,055 - INFO - Training model: LinearRegression with params: {}
+2024-07-18 00:09:44,075 - INFO - Best estimator for LinearRegression: LinearRegression()
+2024-07-18 00:09:44,075 - INFO - Cross-validation MAPE for LinearRegression: 3.621450335485783e+20
+2024-07-18 00:09:44,075 - INFO - Training model: KNN with params: {'n_neighbors': [3, 5, 7, 9]}
+2024-07-18 00:09:44,177 - INFO - Best estimator for KNN: KNeighborsRegressor(n_neighbors=9)
+2024-07-18 00:09:44,177 - INFO - Cross-validation MAPE for KNN: 3.225409757614974e+20
+2024-07-18 00:09:44,177 - INFO - Training model: SVM with params: {'C': [0.1, 1, 10]}
+2024-07-18 00:09:44,251 - INFO - Best estimator for SVM: SVR(C=0.1)
+2024-07-18 00:09:44,251 - INFO - Cross-validation MAPE for SVM: 2.880852405902797e+20
+2024-07-18 00:09:44,251 - INFO - Training model: DecisionTree with params: {'max_depth': [3, 5, 7, 9]}
+2024-07-18 00:09:44,309 - INFO - Best estimator for DecisionTree: DecisionTreeRegressor(max_depth=3, random_state=123)
+2024-07-18 00:09:44,309 - INFO - Cross-validation MAPE for DecisionTree: 3.353273004167746e+20
+2024-07-18 00:09:44,309 - INFO - Training model: RandomForest with params: {'n_estimators': [50, 100, 200], 'max_depth': [3, 5, 7]}
+2024-07-18 00:09:49,119 - INFO - Best estimator for RandomForest: RandomForestRegressor(max_depth=5, n_estimators=50, random_state=123)
+2024-07-18 00:09:49,119 - INFO - Cross-validation MAPE for RandomForest: 3.536096237900771e+20
+2024-07-18 00:09:49,120 - INFO - Training model: XGBoost with params: {'n_estimators': [50, 100, 200], 'max_depth': [3, 5, 7]}
+2024-07-18 00:09:52,291 - INFO - Best estimator for XGBoost: XGBRegressor with params: {'learning_rate': None, 'max_depth': 5, 'n_estimators': 50}
+2024-07-18 00:09:52,291 - INFO - Cross-validation MAPE for XGBoost: 3.387230829642066e+20
+2024-07-18 00:09:52,292 - INFO - Training model: LightGBM with params: {'n_estimators': [50, 100, 200], 'max_depth': [3, 5, 7]}
+2024-07-18 00:09:52,961 - INFO - Best estimator for LightGBM: LGBMRegressor(max_depth=3, n_estimators=50, random_state=123, verbose=-1)
+2024-07-18 00:09:52,961 - INFO - Cross-validation MAPE for LightGBM: 3.583112232549268e+20
+2024-07-18 00:09:52,962 - INFO - Training model: MLP with params: {'hidden_layer_sizes': [(50,), (100,), (50, 50)], 'alpha': [0.0001, 0.001, 0.01]}
+2024-07-18 00:10:07,931 - INFO - Best estimator for MLP: MLPRegressor(alpha=0.01, hidden_layer_sizes=(50,), max_iter=1000,
+             random_state=123)
+2024-07-18 00:10:07,931 - INFO - Cross-validation MAPE for MLP: 3.418697812111933e+17
+2024-07-18 00:10:07,931 - INFO - Training model: ARIMA with params: {'order': [(1, 1, 1), (2, 1, 2)]}
+2024-07-18 00:10:08,303 - INFO - Best estimator for ARIMA: ARIMAWrapper(order=(1, 1, 1))
+2024-07-18 00:10:08,303 - INFO - Cross-validation MAPE for ARIMA: 3.088326852330038e+20
+2024-07-18 00:10:08,304 - INFO - Training model: SARIMA with params: {'order': [(1, 1, 1), (2, 1, 2)], 'seasonal_order': [(1, 1, 1, 12), (2, 1, 2, 12)]}
+2024-07-18 00:10:24,668 - INFO - Best estimator for SARIMA: SARIMAXWrapper(order=(2, 1, 2), seasonal_order=(1, 1, 1, 12))
+2024-07-18 00:10:24,668 - INFO - Cross-validation MAPE for SARIMA: 3.719973739669827e+20
+2024-07-18 00:10:24,749 - INFO - --Testing--
+2024-07-18 00:10:24,752 - INFO - 將名目變數 ['city'] 做 One-Hot Encoding
+2024-07-18 00:10:24,752 - INFO - 使用 mean 補遺失值
+2024-07-18 00:10:24,772 - INFO - 使用 StandardScaler() 做正規化
+2024-07-18 00:10:24,774 - INFO - 最終選擇特徵: ['sqft_lot', 'city_Bothell', 'city_Issaquah', 'city_Kent', 'yr_built', 'bedrooms', 'city_Sammamish', 'city_Seattle', 'city_Snoqualmie', 'city_Kirkland', 'sqft_above', 'city_Woodinville', 'sqft_living', 'bathrooms', 'city_Redmond', 'city_Auburn', 'floors', 'city_Enumclaw', 'city_Carnation', 'city_Mercer Island', 'view']
+2024-07-18 00:10:24,776 - INFO - Model: LinearRegression, Metrics: {'R-squared': -0.4339, 'Adjusted R-squared': -1.7431, 'RMSE': 185814.9783, 'MAPE': 245691781762815.78}
+2024-07-18 00:10:24,895 - INFO - Model: KNN, Metrics: {'R-squared': -0.005, 'Adjusted R-squared': -0.9227, 'RMSE': 155565.9744, 'MAPE': 235512251955555.78}
+2024-07-18 00:10:25,014 - INFO - Model: SVM, Metrics: {'R-squared': -0.0768, 'Adjusted R-squared': -1.06, 'RMSE': 161027.1499, 'MAPE': 251348344100615.88}
+2024-07-18 00:10:25,120 - INFO - Model: DecisionTree, Metrics: {'R-squared': -1.2537, 'Adjusted R-squared': -3.3114, 'RMSE': 232954.9999, 'MAPE': 263485170462077.7}
+2024-07-18 00:10:25,235 - INFO - Model: RandomForest, Metrics: {'R-squared': -0.6606, 'Adjusted R-squared': -2.1768, 'RMSE': 199964.658, 'MAPE': 218167958025517.72}
+2024-07-18 00:10:25,349 - INFO - Model: XGBoost, Metrics: {'R-squared': -0.4954, 'Adjusted R-squared': -1.8607, 'RMSE': 189756.3559, 'MAPE': 203776157986111.5}
+2024-07-18 00:10:25,457 - INFO - Model: LightGBM, Metrics: {'R-squared': -0.0612, 'Adjusted R-squared': -1.0301, 'RMSE': 159851.5168, 'MAPE': 226450090220567.03}
+2024-07-18 00:10:25,565 - INFO - Model: MLP, Metrics: {'R-squared': -4.3994, 'Adjusted R-squared': -9.3293, 'RMSE': 360575.6665, 'MAPE': 207275012713.1152}
+2024-07-18 00:10:25,670 - INFO - Model: ARIMA, Metrics: {'R-squared': -0.6762, 'Adjusted R-squared': -2.2066, 'RMSE': 200902.9588, 'MAPE': nan}
+2024-07-18 00:10:25,778 - INFO - Model: SARIMA, Metrics: {'R-squared': -2.3466, 'Adjusted R-squared': -5.4021, 'RMSE': 283872.1562, 'MAPE': nan}
+2024-07-18 00:10:25,884 - INFO - 測試集表現最佳模型為: MLP

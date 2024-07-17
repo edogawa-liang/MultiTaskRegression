@@ -15,6 +15,7 @@ def load_data(file_path, sheet_name=None):
     根據文件擴展名讀取 csv 或 xlsx 文件。
     """
     ext = os.path.splitext(file_path)[1]
+    print(ext)
     if ext == '.csv':
         return pd.read_csv(file_path)
     elif ext == '.xlsx':
