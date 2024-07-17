@@ -1,0 +1,5 @@
+__pycache__
+try/
+note.txt
+data/
+*.pkl

@@ -1,0 +1,66 @@
+2024-07-17 22:09:04,584 - INFO - 繪製相關性熱圖至 123/fig/corr_heatmap.png
+2024-07-17 22:09:04,711 - INFO - 繪製時間與學期成績(原始)折線圖至 123/fig/Name_學期成績(原始).png
+2024-07-17 22:09:04,813 - INFO - 繪製Midterm與學期成績(原始) 散佈圖至 123/fig/Midterm_學期成績(原始).png
+2024-07-17 22:09:04,907 - INFO - 繪製Final與學期成績(原始) 散佈圖至 123/fig/Final_學期成績(原始).png
+2024-07-17 22:09:05,011 - INFO - 繪製Final (+30 Adjusted)與學期成績(原始) 散佈圖至 123/fig/Final (+30 Adjusted)_學期成績(原始).png
+2024-07-17 22:09:05,125 - INFO - 繪製HW1與學期成績(原始) 長條圖至 123/fig/HW1_學期成績(原始).png
+2024-07-17 22:09:05,233 - INFO - 繪製HW2與學期成績(原始) 長條圖至 123/fig/HW2_學期成績(原始).png
+2024-07-17 22:09:05,330 - INFO - 繪製HW3與學期成績(原始) 長條圖至 123/fig/HW3_學期成績(原始).png
+2024-07-17 22:09:05,427 - INFO - 繪製HW4與學期成績(原始) 長條圖至 123/fig/HW4_學期成績(原始).png
+2024-07-17 22:09:05,521 - INFO - 繪製學期成績(最終)與學期成績(原始) 散佈圖至 123/fig/學期成績(最終)_學期成績(原始).png
+2024-07-17 22:09:05,524 - INFO - Data split into features and target.
+2024-07-17 22:09:05,524 - INFO - Performing random split...
+2024-07-17 22:09:05,526 - INFO - 隨機劃分資料集，測試集比例為 0.2 
+2024-07-17 22:09:05,532 - INFO - 將名目變數 ['ID', 'Department'] 做 One-Hot Encoding
+2024-07-17 22:09:05,741 - INFO - 使用 mean 補遺失值
+2024-07-17 22:09:06,023 - INFO - 使用 StandardScaler() 做正規化
+2024-07-17 22:09:06,087 - INFO - 使用 lasso 選擇特徵
+2024-07-17 22:09:06,087 - INFO - 重要變數 'HW1' 不在選擇的特徵中，已加入。
+2024-07-17 22:09:06,087 - INFO - 最終選擇特徵: ['Midterm', 'Final', '學期成績(最終)', 'ID_F74104765', 'ID_F74116089', 'Department_統計系', 'HW1']
+2024-07-17 22:09:06,088 - INFO - 加入時間序列模型
+2024-07-17 22:09:06,088 - INFO - Training model: LinearRegression with params: {}
+2024-07-17 22:09:06,105 - INFO - Best estimator for LinearRegression: LinearRegression()
+2024-07-17 22:09:06,106 - INFO - Cross-validation MAPE for LinearRegression: 101526779815624.28
+2024-07-17 22:09:06,106 - INFO - Training model: KNN with params: {'n_neighbors': [3, 5, 7, 9]}
+2024-07-17 22:09:06,164 - INFO - Best estimator for KNN: KNeighborsRegressor(n_neighbors=3)
+2024-07-17 22:09:06,164 - INFO - Cross-validation MAPE for KNN: 4025864843369037.5
+2024-07-17 22:09:06,164 - INFO - Training model: SVM with params: {'C': [0.1, 1, 10]}
+2024-07-17 22:09:06,215 - INFO - Best estimator for SVM: SVR(C=10)
+2024-07-17 22:09:06,215 - INFO - Cross-validation MAPE for SVM: 4532689750562550.0
+2024-07-17 22:09:06,215 - INFO - Training model: DecisionTree with params: {'max_depth': [3, 5, 7, 9]}
+2024-07-17 22:09:06,270 - INFO - Best estimator for DecisionTree: DecisionTreeRegressor(max_depth=3, random_state=123)
+2024-07-17 22:09:06,270 - INFO - Cross-validation MAPE for DecisionTree: 3112782095388431.0
+2024-07-17 22:09:06,270 - INFO - Training model: RandomForest with params: {'n_estimators': [50, 100, 200], 'max_depth': [3, 5, 7]}
+2024-07-17 22:09:10,504 - INFO - Best estimator for RandomForest: RandomForestRegressor(max_depth=7, n_estimators=200, random_state=123)
+2024-07-17 22:09:10,504 - INFO - Cross-validation MAPE for RandomForest: 3758796970172207.0
+2024-07-17 22:09:10,504 - INFO - Training model: XGBoost with params: {'n_estimators': [50, 100, 200], 'max_depth': [3, 5, 7]}
+2024-07-17 22:09:12,145 - INFO - Best estimator for XGBoost: XGBRegressor with params: {'learning_rate': None, 'max_depth': 3, 'n_estimators': 100}
+2024-07-17 22:09:12,145 - INFO - Cross-validation MAPE for XGBoost: 3755905849620985.5
+2024-07-17 22:09:12,145 - INFO - Training model: LightGBM with params: {'n_estimators': [50, 100, 200], 'max_depth': [3, 5, 7]}
+2024-07-17 22:09:12,664 - INFO - Best estimator for LightGBM: LGBMRegressor(max_depth=3, n_estimators=50, random_state=123, verbose=-1)
+2024-07-17 22:09:12,665 - INFO - Cross-validation MAPE for LightGBM: 4673777675259562.0
+2024-07-17 22:09:12,665 - INFO - Training model: MLP with params: {'hidden_layer_sizes': [(50,), (100,), (50, 50)], 'alpha': [0.0001, 0.001, 0.01]}
+2024-07-17 22:09:23,473 - INFO - Best estimator for MLP: MLPRegressor(hidden_layer_sizes=(50, 50), max_iter=1000, random_state=123)
+2024-07-17 22:09:23,473 - INFO - Cross-validation MAPE for MLP: 1553139985283917.2
+2024-07-17 22:09:23,473 - INFO - Training model: ARIMA with params: {'order': [(1, 1, 1), (2, 1, 2)]}
+2024-07-17 22:09:23,971 - INFO - Best estimator for ARIMA: ARIMAWrapper(order=(1, 1, 1))
+2024-07-17 22:09:23,972 - INFO - Cross-validation MAPE for ARIMA: 5021631570986075.0
+2024-07-17 22:09:23,972 - INFO - Training model: SARIMA with params: {'order': [(1, 1, 1), (2, 1, 2)], 'seasonal_order': [(1, 1, 1, 12), (2, 1, 2, 12)]}
+2024-07-17 22:09:41,474 - INFO - Best estimator for SARIMA: SARIMAXWrapper(order=(1, 1, 1), seasonal_order=(1, 1, 1, 12))
+2024-07-17 22:09:41,475 - INFO - Cross-validation MAPE for SARIMA: 5033480792553064.0
+2024-07-17 22:09:41,588 - INFO - --Testing--
+2024-07-17 22:09:41,591 - INFO - 將名目變數 ['ID', 'Department'] 做 One-Hot Encoding
+2024-07-17 22:09:41,591 - INFO - 使用 mean 補遺失值
+2024-07-17 22:09:41,697 - INFO - 使用 StandardScaler() 做正規化
+2024-07-17 22:09:41,698 - INFO - 最終選擇特徵: ['Midterm', 'Final', '學期成績(最終)', 'ID_F74104765', 'ID_F74116089', 'Department_統計系', 'HW1']
+2024-07-17 22:09:41,700 - INFO - Model: LinearRegression, Metrics: {'R-squared': 0.9971, 'Adjusted R-squared': 0.996, 'RMSE': 1.1395, 'MAPE': 0.0087}
+2024-07-17 22:09:41,831 - INFO - Model: KNN, Metrics: {'R-squared': 0.8288, 'Adjusted R-squared': 0.7657, 'RMSE': 8.7521, 'MAPE': 0.4144}
+2024-07-17 22:09:41,946 - INFO - Model: SVM, Metrics: {'R-squared': 0.6917, 'Adjusted R-squared': 0.5781, 'RMSE': 11.7461, 'MAPE': 0.5948}
+2024-07-17 22:09:42,059 - INFO - Model: DecisionTree, Metrics: {'R-squared': 0.8689, 'Adjusted R-squared': 0.8205, 'RMSE': 7.6603, 'MAPE': 0.3142}
+2024-07-17 22:09:42,179 - INFO - Model: RandomForest, Metrics: {'R-squared': 0.948, 'Adjusted R-squared': 0.9289, 'RMSE': 4.822, 'MAPE': 0.242}
+2024-07-17 22:09:42,304 - INFO - Model: XGBoost, Metrics: {'R-squared': 0.9445, 'Adjusted R-squared': 0.9241, 'RMSE': 4.9831, 'MAPE': 0.1991}
+2024-07-17 22:09:42,426 - INFO - Model: LightGBM, Metrics: {'R-squared': 0.5328, 'Adjusted R-squared': 0.3607, 'RMSE': 14.4584, 'MAPE': 0.6534}
+2024-07-17 22:09:42,543 - INFO - Model: MLP, Metrics: {'R-squared': 0.9699, 'Adjusted R-squared': 0.9589, 'RMSE': 3.6671, 'MAPE': 0.1424}
+2024-07-17 22:09:42,666 - INFO - Model: ARIMA, Metrics: {'R-squared': -0.9517, 'Adjusted R-squared': -1.6708, 'RMSE': 29.5517, 'MAPE': nan}
+2024-07-17 22:09:42,789 - INFO - Model: SARIMA, Metrics: {'R-squared': -1.3758, 'Adjusted R-squared': -2.2511, 'RMSE': 32.6048, 'MAPE': nan}
+2024-07-17 22:09:42,897 - INFO - 測試集表現最佳模型為: LinearRegression
