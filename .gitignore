@@ -3,3 +3,4 @@ try/
 note.txt
 data/
 *.pkl
+*.csv
