@@ -1,5 +1,6 @@
 import argparse
 import os
+import pandas as pd
 import joblib
 from sklearn.pipeline import Pipeline
 from prep.load import load_data, create_folders
@@ -120,6 +121,11 @@ def main(args):
         # 9. 視覺化
         plot_true_vs_pred(y_test, y_pred, name, args.target_column, base_folder=base_folder)
     
+        # 10. 保存預測結果
+        # 保存預測結果
+        y_pred_df = pd.DataFrame({'y_true': y_test, f'{name}_prediction': y_pred})
+        y_pred_df.to_csv(f"{base_folder}/result/prediction/{name}_predictions.csv", index=False)
+
     if len(trained_models) > 1:
         logging.info(f"測試集表現最佳模型為: {best_model}")
         print(f"測試集表現最佳模型為: {best_model}")

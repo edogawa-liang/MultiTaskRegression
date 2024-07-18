@@ -5,7 +5,7 @@ def create_folders(base_folder):
     """
     建立資料夾。
     """
-    for folder in ['fig', 'saved_model', 'result', 'result/feature_importance', 'result/density_plot']:
+    for folder in ['fig', 'saved_model', 'result', 'result/feature_importance', 'result/density_plot', 'result/prediction']:
         folder_path = os.path.join(base_folder, folder)
         os.makedirs(folder_path, exist_ok=True)
 
