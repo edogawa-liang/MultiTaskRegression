@@ -1,19 +1,19 @@
 Model: LinearRegression
-{'R-squared': -0.4339, 'Adjusted R-squared': -1.7431, 'RMSE': 185814.9783, 'MAPE': 245691781762815.34}
+{'R-squared': -0.4339, 'Adjusted R-squared': -1.7431, 'RMSE': 185814.9783, 'MAPE': 245691781762815.66}
 Model: KNN
 {'R-squared': -0.005, 'Adjusted R-squared': -0.9227, 'RMSE': 155565.9744, 'MAPE': 235512251955555.78}
 Model: SVM
 {'R-squared': -0.0768, 'Adjusted R-squared': -1.06, 'RMSE': 161027.1499, 'MAPE': 251348344100615.88}
 Model: DecisionTree
-{'R-squared': -1.2564, 'Adjusted R-squared': -3.3165, 'RMSE': 233091.8079, 'MAPE': 263485170462077.8}
+{'R-squared': -2.3425, 'Adjusted R-squared': -5.3944, 'RMSE': 283701.7081, 'MAPE': 250952591908715.16}
 Model: RandomForest
-{'R-squared': -0.6562, 'Adjusted R-squared': -2.1684, 'RMSE': 199700.5679, 'MAPE': 254186875369716.3}
+{'R-squared': -0.483, 'Adjusted R-squared': -1.8371, 'RMSE': 188973.3977, 'MAPE': 252452302225450.4}
 Model: XGBoost
-{'R-squared': -0.208, 'Adjusted R-squared': -1.311, 'RMSE': 170553.7668, 'MAPE': 202375699652778.12}
+{'R-squared': -0.5274, 'Adjusted R-squared': -1.922, 'RMSE': 191778.2955, 'MAPE': 203896328125000.4}
 Model: LightGBM
 {'R-squared': -0.0612, 'Adjusted R-squared': -1.0301, 'RMSE': 159851.5168, 'MAPE': 226450090220567.03}
 Model: MLP
-{'R-squared': -4.4, 'Adjusted R-squared': -9.3304, 'RMSE': 360594.2977, 'MAPE': 210294679787.2985}
+{'R-squared': -4.4008, 'Adjusted R-squared': -9.332, 'RMSE': 360622.7052, 'MAPE': 225578484926.7969}
 Model: ARIMA
 {'R-squared': -0.6762, 'Adjusted R-squared': -2.2066, 'RMSE': 200902.9588, 'MAPE': nan}
 Model: SARIMA

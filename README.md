@@ -2,7 +2,7 @@
 設計通用任務的迴歸模型，以自動化方式完成一系列資料分析流程。
 
 ## Pipeline
-<img src="viz/flow.png" width="90">    
+<img src="viz/flow.png" width="90%">    
 
 ```  
 Regression Analysis
@@ -21,8 +21,8 @@ Regression Analysis
         ├── eval.py (模型評估)
         └── time.py (時間序列模型sklearn接口)
 
-
 ```
+
 ## How to inference on your data
 ```python
 python main.py --target_column target --input_file data.csv 
