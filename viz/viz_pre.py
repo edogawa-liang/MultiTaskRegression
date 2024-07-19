@@ -17,14 +17,15 @@ def _corr_heatmap(df, base_folder):
     plt.figure(figsize=[8, 6])
     corr = numeric_df.corr(min_periods=1)
     sns.heatmap(corr, xticklabels=corr.columns, yticklabels=corr.columns, cmap='coolwarm')
-    plt.title('變數相關性熱圖', fontproperties=fontset)
+    # plt.title('變數相關性熱圖', fontproperties=fontset)
+    plt.title('Correlation Heatmap', fontproperties=fontset)
     plt.xticks(fontproperties=fontset)
     plt.yticks(fontproperties=fontset)
     plt.tight_layout()
     output_path = os.path.join(base_folder, 'fig', 'corr_heatmap.png')
     plt.savefig(output_path)
     plt.close()
-    logging.info(f"繪製相關性熱圖至 {output_path}")
+    logging.info(f"Saved correlation heatmap to {output_path}")
 
 
 def _plot_cont(X, y, column, target, base_folder):
@@ -33,14 +34,14 @@ def _plot_cont(X, y, column, target, base_folder):
     """
     plt.figure(figsize=(6, 4.5))
     sns.scatterplot(x=X[column], y=y)
-    plt.title(f'{column} 與 {target} 散佈圖', fontproperties=fontset)
+    plt.title(f'{column} vs {target} Scatter Plot', fontproperties=fontset)
     plt.ylabel(target, fontproperties=fontset)
     plt.xlabel(column, fontproperties=fontset) 
     plt.tight_layout()
     output_path = os.path.join(base_folder, 'fig', f'{column}_{target}.png')
     plt.savefig(output_path)
     plt.close()
-    logging.info(f"繪製{column}與{target} 散佈圖至 {output_path}")
+    logging.info(f"Saved {column} vs {target} scatter plot to {output_path}")
 
 
 def _plot_cat(X, y, column, target, base_folder):
@@ -49,14 +50,14 @@ def _plot_cat(X, y, column, target, base_folder):
     """
     plt.figure(figsize=(6, 4.5))
     sns.barplot(x=X[column], y=y)
-    plt.title(f'{column} 與 {target} 長條圖', fontproperties=fontset)
+    plt.title(f'{column} vs {target} Bar Plot', fontproperties=fontset)
     plt.xlabel(column, fontproperties=fontset)
     plt.ylabel(target, fontproperties=fontset)
     plt.tight_layout()
     output_path = os.path.join(base_folder, 'fig', f'{column}_{target}.png')
     plt.savefig(output_path)
     plt.close()
-    logging.info(f"繪製{column}與{target} 長條圖至 {output_path}")
+    logging.info(f"Saved {column} vs {target} bar plot to {output_path}")
 
 
 def _plot_time(X, y, time_column, target, base_folder):
@@ -65,7 +66,7 @@ def _plot_time(X, y, time_column, target, base_folder):
     """
     plt.figure(figsize=(8, 4))
     plt.plot_date(y, '-')
-    plt.title(f'時間與 {target} 折線圖', fontproperties=fontset)
+    plt.title(f'Time vs {target} Line Plot', fontproperties=fontset)
     plt.xlabel(time_column, fontproperties=fontset)
     plt.ylabel(target, fontproperties=fontset)
     
@@ -78,7 +79,7 @@ def _plot_time(X, y, time_column, target, base_folder):
     output_path = os.path.join(base_folder, 'fig', f'{time_column}_{target}.png')
     plt.savefig(output_path)
     plt.close()
-    logging.info(f"繪製時間與{target}折線圖至 {output_path}")
+    logging.info(f"Saved time vs {target} line plot to {output_path}")
 
 
 def _auto_plot(X, y, column, target, base_folder):
@@ -129,7 +130,7 @@ def plot_Xy(df, target, plot_col='all', time_column=None, base_folder='.'):
                 # remove time_column from columns
                 columns = [col for col in columns if col != time_column]
             except Exception as e:
-                error_messages.append(f"錯誤訊息: {e}")
+                error_messages.append(f"Error: {e}")
         
         for column in columns:
             if column in X.columns:
@@ -137,7 +138,7 @@ def plot_Xy(df, target, plot_col='all', time_column=None, base_folder='.'):
                 if error_message:
                     error_messages.append(error_message)
             else:
-                error_messages.append(f'變數 {column} 不在資料集中')
+                error_messages.append(f'Column {column} not in dataset')
         
         if error_messages:
             return error_messages

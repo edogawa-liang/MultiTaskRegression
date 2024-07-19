@@ -4,7 +4,7 @@ from statsmodels.tsa.statespace.sarimax import SARIMAX
 import logging
 
 class ARIMAWrapper(BaseEstimator):
-    def __init__(self, order):
+    def __init__(self, order=None):
         self.order = order
         self.model_ = None
     
@@ -14,11 +14,11 @@ class ARIMAWrapper(BaseEstimator):
         return self
     
     def predict(self, X):
-        return self.model_.predict(start=0, end=len(X)-1)
+        return self.model_.predict(start=0, end=len(X)-1).tolist()
 
 
 class SARIMAXWrapper(BaseEstimator):
-    def __init__(self, order, seasonal_order):
+    def __init__(self, order=None, seasonal_order=None):
         self.order = order
         self.seasonal_order = seasonal_order
         self.model_ = None
@@ -29,4 +29,4 @@ class SARIMAXWrapper(BaseEstimator):
         return self
     
     def predict(self, X):
-        return self.model_.predict(start=0, end=len(X)-1)
+        return self.model_.predict(start=0, end=len(X)-1).tolist()

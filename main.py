@@ -65,7 +65,7 @@ def main(args):
         
         # 2. 劃分資料集
         try:    
-            X_train, X_test, y_train, y_test = split_dataset(df, args.target_column, args.test_size, random_state=args.seed, test_file=args.test_file, sheet_name=args.sheet, time_column=None)
+            X_train, X_test, y_train, y_test = split_dataset(df, args.target_column, args.test_size, random_state=args.seed, test_file=args.test_file, sheet_name=args.sheet, time_column=args.time_column)
         except Exception as e:
             return f"Failed to split dataset: {e}"
         

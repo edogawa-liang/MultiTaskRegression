@@ -30,8 +30,8 @@ class ModelManager():
         if self.time_column is not None:
             logging.info("加入時間序列模型")
             self.all_models.update({
-                'ARIMA': (ARIMAWrapper(order=(1, 1, 1)), {'order': [(1, 1, 1), (2, 1, 2)]}),
-                'SARIMA': (SARIMAXWrapper(order=(1, 1, 1), seasonal_order=(1, 1, 1, 12)), {'order': [(1, 1, 1), (2, 1, 2)], 'seasonal_order': [(1, 1, 1, 12), (2, 1, 2, 12)]})
+                'ARIMA': (ARIMAWrapper(), {'order': [(1, 1, 1), (2, 1, 2)]}),
+                'SARIMA': (SARIMAXWrapper(), {'order': [(1, 1, 1), (2, 1, 2)], 'seasonal_order': [(1, 1, 1, 12), (2, 1, 2, 12)]})
             })
 
         if models == 'all':

@@ -39,12 +39,12 @@ def plot_true_vs_pred(y_true, y_pred, name, target_column, base_folder):
 
     # 繪製密度圖
     plt.figure(figsize=(6, 4.5))
-    sns.kdeplot(df['Actual'], shade=True, color="#3498db", label="實際值")  # 藍色
-    sns.kdeplot(df['Predicted'], shade=True, color="#e74c3c", label="預估值")  # 紅色
+    sns.kdeplot(df['Actual'], shade=True, color="#3498db", label="Actual")  # Blue
+    sns.kdeplot(df['Predicted'], shade=True, color="#e74c3c", label="Predicted")  # Red
     plt.legend(prop=fontset)
     plt.xlabel(target_column, fontproperties=fontset)
     plt.ylabel("Density")
-    plt.title('實際值與預估值之密度圖', fontproperties=fontset)
+    plt.title('Density Plot of Actual vs Predicted', fontproperties=fontset)
     plt.tight_layout()
     output_path = os.path.join(base_folder, 'result/density_plot', f'{name}_densplot.png')
     plt.savefig(output_path)
