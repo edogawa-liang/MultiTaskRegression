@@ -3,7 +3,8 @@ Automate a variety of data analysis processes with a generic regression model. T
 
 ## Pipeline
 <img src="viz/flow.png" width="90%">    
-
+<img src="viz/flow2.png" width="90%"> 
+  
 ```  
 Regression Analysis
     ├── viz
