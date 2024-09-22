@@ -1,5 +1,5 @@
 # Regression Model for Multi-Task
-Automate a variety of data analysis processes with a generic regression model. This model is designed to streamline the entire workflow from data preprocessing to model evaluation and visualization, making it suitable for multiple regression tasks.
+This program automates a wide range of data analysis tasks using a generic regression model. It streamlines the entire workflow, from data visualization and preprocessing to modeling and evaluation, making it well-suited for various regression tasks.
 
 ## Pipeline
 **Regression Analysis Workflow**  
