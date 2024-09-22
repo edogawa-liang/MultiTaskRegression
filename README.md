@@ -41,15 +41,15 @@ Regression Analysis
 
 ## How to inference on your data
 ```python
-python main.py --target_column target --input_file data.csv 
+python main.py --input_file [file_dir] --target_column [taget name]
 ```
 
+- `--input_file` (str, optional): Input file (csv, xlsx).
+- `--target_column` (str, required): Name of the target column.
 - `--base_folder` (str, optional): Base directory for storing results. Default is the current directory.
 - `--sheet` (str, optional): Name of the sheet to load. Default is the first sheet.
 - `--load_model` (str, optional): Name of the model to load, use `None` to train a new model. Default is `None`.
-- `--input_file` (str, optional): Input file (csv, xlsx).
 - `--test_file` (str, optional): Path to the test file (csv, xlsx).
-- `--target_column` (str, required): Name of the target column.
 - `--preserve_vars` (str, optional): Important variables that need to be preserved. Default is `None`.
 - `--plot_col` (str, optional): Specify columns for plotting. Options include `all` (plot every column), `no_draw` (do not plot), and column names separated by commas. Default is `all`.
 - `--time_column` (str, optional): Time column. Default is `None`.
