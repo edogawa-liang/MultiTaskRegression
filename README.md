@@ -2,13 +2,21 @@
 Automate a variety of data analysis processes with a generic regression model. This model is designed to streamline the entire workflow from data preprocessing to model evaluation and visualization, making it suitable for multiple regression tasks.
 
 ## Pipeline
+**Regression Analysis Workflow**  
+
 <img src="viz/flow.png" width="90%">    
+
+---
+
+**Integration with LLM**
+
 <img src="viz/flow2-2.png" width="90%"> 
-  
+
+---
 ```  
 Regression Analysis
     ├── main.py (This script can be executed if not using the API)
-    ├── api.py (Execute this script if using the API via Dify)
+    ├── api.py (Execute this script if using the API)
     ├── pred.zip (How to execute the model for predictions)
     ├── data
     ├── viz 
@@ -61,6 +69,7 @@ python main.py --target_column target --input_file data.csv
 python main.py --input_file "data/house_price.csv" --target_column price  --time_column date --preserve_vars bedrooms,view  --base_folder example/house --seed 123
 ```
 
+**Output File**
 ```
 example/house
 ├── analysis.log (Data Analysis Log)
