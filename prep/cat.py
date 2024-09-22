@@ -52,7 +52,7 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         X = X.copy()
-        # 對ordinal資料進行處理 (變成類別無法進行encoder)
+        # 對ordinal資料進行處理 (變成類別無法進行encoder, 暫當成連續型
         # for col in self.ordinal_cols:
         #     X[col] = pd.Categorical(X[col], ordered=True)
         
@@ -72,5 +72,8 @@ class CategoricalEncoder(BaseEstimator, TransformerMixin):
             X = X.drop(columns=[col])
             X = pd.concat([X.reset_index(drop=True), ohe_df.reset_index(drop=True)], axis=1)
         
-        logging.info(f"將名目變數 {self.nominal_cols} 做 One-Hot Encoding")
+        if len(self.nominal_cols) == 0:
+            logging.info(f"此資料無類別型變數，不需進行類別變數處理")
+        else:
+            logging.info(f"處理類別型變數: 將名目變數 {self.nominal_cols} 做 One-Hot Encoding")
         return X

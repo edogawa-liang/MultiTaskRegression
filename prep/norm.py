@@ -30,7 +30,7 @@ class CustomNormalizer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X):
-        logging.info(f"使用 {self.scaler} 做正規化")
+        logging.info(f"正規化方法: 使用 {self.scaler}")
         # 應用擬合好的scaler進行轉換
         X_transformed = pd.DataFrame(self.scaler.transform(X), columns=X.columns)
         return X_transformed

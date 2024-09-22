@@ -14,12 +14,12 @@ class FeatureSelector(BaseEstimator, TransformerMixin):
         
         # 將字串轉換為列表
         if isinstance(preserve_vars, str):
-            preserve_vars = [var.strip() for var in preserve_vars.split(',')]
+            preserve_vars = [var.strip() for var in preserve_vars.split(',') if var.strip()] 
         self.preserve_vars = preserve_vars if preserve_vars is not None else [] # 必須保留的變數
 
     def _backward_selection(self, X, y):
-        X, y = X.align(y, join='inner', axis=0)
         features = list(X.columns)
+        y = y.reindex(X.index)  # 確保因變量的索引和自變量一致
         while len(features) > 0:
             X_with_const = sm.add_constant(X[features])
             model = sm.OLS(y, X_with_const).fit()
@@ -53,26 +53,29 @@ class FeatureSelector(BaseEstimator, TransformerMixin):
             if X.shape[1] > 50:
                 self.method = 'lasso'
             else:
-                self.method = 'model'
+                self.method = 'backward+rf'
 
-        if self.method == 'model':
+        if self.method == 'backward+rf':
             backward_features = self._backward_selection(X, y)
             forest_features = self._rf_selection(X, y)
             self.selected_features = list(set(backward_features).union(set(forest_features)))
+            logging.info(f"特徵擷取: 使用 Linear Backward Selection 與 Random Forest 的重要變數聯集選擇特徵")
 
         elif self.method == 'backward':
             self.selected_features = self._backward_selection(X, y)
+            logging.info(f"特徵擷取: 使用 Linear Backward Selection 選擇特徵")
         
         elif self.method == 'rf':
             self.selected_features = self._rf_selection(X, y)
+            logging.info(f"特徵擷取: 使用 Random Forest 選擇特徵")
 
         elif self.method == 'lasso':
             self.selected_features = self._lasso_selection(X, y)
+            logging.info(f"特徵擷取: 使用 LASSO 選擇特徵")
 
         else:
-            raise ValueError("Invalid method. Choose from 'auto', 'model', 'backward', 'rf', or 'lasso'.")
+            raise ValueError("Invalid method. Choose from 'auto', 'backward+rf', 'backward', 'rf', or 'lasso'.")
 
-        logging.info(f"使用 {self.method} 選擇特徵")
         return self
 
     def transform(self, X):
@@ -83,4 +86,5 @@ class FeatureSelector(BaseEstimator, TransformerMixin):
                 logging.info(f"重要變數 '{var}' 不在選擇的特徵中，已加入。")
         logging.info(f"最終選擇特徵: {self.selected_features}")
 
+        # return X[self.selected_features]
         return X[self.selected_features].reindex(X.index)

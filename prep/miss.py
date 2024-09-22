@@ -30,12 +30,12 @@ class CustomImputer(BaseEstimator, TransformerMixin):
         vars_to_drop = [var for var in missing_var_ratio[missing_var_ratio > 0.6].index if var not in self.preserve_vars]
         if vars_to_drop:
             df = df.drop(columns=vars_to_drop)
-            logging.info(f"變數超過60%的樣本遺失，刪除變數: {vars_to_drop}")
+            logging.info(f"遺失值處理: 變數超過60%的樣本遺失，刪除變數: {vars_to_drop}")
         
         # 如果樣本超過60%的變數遺失，刪除樣本
         if any(missing_sample_ratio > 0.6):
             df = df.drop(index=missing_sample_ratio[missing_sample_ratio > 0.6].index)
-            logging.info(f"樣本超過60%的變數遺失，刪除樣本")
+            logging.info(f"遺失值處理: 樣本超過60%的變數遺失，刪除樣本")
 
         # 使用適當的方法填補缺失值
         if df.shape[0] > 200:
@@ -72,7 +72,7 @@ class CustomImputer(BaseEstimator, TransformerMixin):
 
     def fit(self, X, y=None):
         if self.method == 'auto':
-            self._handle_missing(X)
+            X_imputed = self._handle_missing(X)
         else:
             if self.method == 'knn':
                 self.imputer = KNNImputer(n_neighbors=5)
@@ -89,15 +89,34 @@ class CustomImputer(BaseEstimator, TransformerMixin):
 
             if self.imputer:
                 self.imputer.fit(X)
+                X_imputed = pd.DataFrame(self.imputer.transform(X), columns=X.columns)
+            else:
+                X_imputed = X.fillna(self.mean_values)
 
+        self.feature_names_ = X_imputed.columns
         return self
 
     
     def transform(self, X):
-        logging.info(f"使用 {self.chosen_method} 補遺失值")
-        if self.method == 'mean' and self.imputer is None:
-            return X.fillna(self.mean_values)
-        elif self.imputer:
-            return pd.DataFrame(self.imputer.transform(X), columns=X.columns)
+        X2 = X[self.feature_names_]
+        # 檢查整個資料集中是否有遺失值
+        if X2.isnull().sum().sum() == 0:
+            if len(self.feature_names_) < X.shape[1]:
+                logging.info(f"遺失值處理: 此筆資料無其他的遺失值")
+            else:
+                logging.info(f"遺失值處理: 此筆資料無遺失值")
+            
+            return X2
+        
         else:
-            return self._handle_missing(X)
+            if X2.isnull().sum().sum() == 0:
+                logging.info(f"遺失值處理: 此筆資料無其他遺失值")
+                return X2
+            else:
+                logging.info(f"遺失值處理: 使用 {self.chosen_method} 填補遺失值")
+
+                if self.method == 'mean' and self.imputer is None:
+                    X_imputed = X2.fillna(self.mean_values)
+                elif self.imputer:
+                    X_imputed = pd.DataFrame(self.imputer.transform(X2), columns=self.feature_names_)
+                return X_imputed

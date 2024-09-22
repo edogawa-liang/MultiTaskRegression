@@ -2,7 +2,7 @@ from sklearn.model_selection import train_test_split
 from prep.load import load_data
 import logging
 
-def split_dataset(data, target_column, test_size=0.2, random_state=None, test_file=None, sheet_name=None, time_column=None):
+def split_dataset(data, target_column, test_size, random_state=None, test_file=None, sheet_name=None, time_column=None):
     '''
     劃分訓練集與測試集
     
@@ -15,7 +15,7 @@ def split_dataset(data, target_column, test_size=0.2, random_state=None, test_fi
     test_file (str, optional): 測試集檔案路徑 (若method為'additional_test'必須提供)
     
     Returns:
-    X_train, X_test, y_train, y_test 或 Exception
+    X_train, X_test, y_train, y_test 
     '''
     try:
         if target_column not in data.columns:
@@ -23,11 +23,10 @@ def split_dataset(data, target_column, test_size=0.2, random_state=None, test_fi
         
         X = data.drop(columns=[target_column])
         y = data[target_column]
-        logging.info("Data split into features and target.")
-
         
         # 若有提供測試集檔案，則讀取
-        if test_file != None :
+        if test_file is not None and test_file != '' :
+            print("提供測試集檔案")
             logging.info(f"Loading additional test file: {test_file}")
             test_data = load_data(test_file, sheet_name=sheet_name)
             if target_column not in test_data.columns:
@@ -40,20 +39,24 @@ def split_dataset(data, target_column, test_size=0.2, random_state=None, test_fi
 
         # 否則進行劃分
         else:
+            print("由提供的資料劃分")
             if time_column is None:
                 # 隨機劃分
-                logging.info("Performing random split...")
                 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
-                logging.info(f"隨機劃分資料集，測試集比例為 {test_size} ")
+                logging.info(f"劃分資料集: 隨機劃分資料集，測試集比例為 {test_size} ")
             
             elif time_column is not None:
                 # 按時間劃分 (假設資料已按時間排序)
+                if time_column not in data.columns:
+                    raise ValueError(f"時間欄位 '{time_column}' 不在資料集中。")
+                
                 split_index = int(len(data) * (1 - test_size))
                 X_train, X_test = X[:split_index], X[split_index:]
                 y_train, y_test = y[:split_index], y[split_index:]
-                logging.info(f"按時間劃分資料集，測試集比例為 {test_size}")
+                logging.info(f"劃分資料集: 按時間劃分資料集，測試集比例為 {test_size}")
             
+        print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
         return X_train, X_test, y_train, y_test
     
     except Exception as e:
-        return e
+        raise RuntimeError(f"Failed to split dataset: {str(e)}")

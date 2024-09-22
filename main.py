@@ -1,7 +1,7 @@
 import argparse
 import os
-import pandas as pd
 import joblib
+import pandas as pd
 from sklearn.pipeline import Pipeline
 from prep.load import load_data, create_folders
 from prep.cat import CategoricalEncoder
@@ -31,6 +31,7 @@ def main(args):
         model_pipeline = joblib.load(os.path.join(base_folder, 'saved_model', f"{args.load_model}.pkl"))
         model = model_pipeline.named_steps['model_training']
         print(f"Model {args.load_model} loaded successfully.")
+        logging.info("成功載入模型")
     
         # 載入測試資料
         test_data = load_data(args.test_file, sheet_name=args.sheet)
@@ -43,6 +44,7 @@ def main(args):
         preprocessor = model_pipeline.named_steps['preprocessor']
         X_test = preprocessor.transform(X_test)
         trained_models = {args.load_model: model}
+        logging.info("測試資料預處理完成")
     
 
     # 否則進行資料前處理與模型訓練
@@ -58,6 +60,7 @@ def main(args):
         df = df.dropna(subset=[args.target_column])
         
         # 0. 資料視覺化
+        logging.info("開始進行資料視覺化")
         plot_Xy(df, args.target_column, plot_col=args.plot_col, time_column=args.time_column, base_folder=base_folder)
 
         # 1. 去除重複值
@@ -70,6 +73,7 @@ def main(args):
             return f"Failed to split dataset: {e}"
         
         # 3. 資料預處理流程
+        logging.info("開始進行資料預處理")
         preprocessor = Pipeline(steps=[
             # 處理類別變數
             ('categorical_encoder', CategoricalEncoder(time_column=args.time_column)),
@@ -85,6 +89,7 @@ def main(args):
         X_train = preprocessor.fit_transform(X_train, y_train)
 
         # 5. 交叉驗證並訓練模型
+        logging.info("開始進行模型訓練與超參數選擇")
         model_manager = ModelManager(args.models, seed=args.seed, time_column=args.time_column) 
         best_models = model_manager.cv_fit(X_train, y_train)
 
@@ -97,7 +102,7 @@ def main(args):
             joblib.dump(model_pipeline, os.path.join(base_folder, 'saved_model', f"{name}.pkl"))
 
         # 7. 將測試資料過預處理
-        logging.info("--Testing--")
+        logging.info("使用測試資料評估模型")
         X_test = preprocessor.transform(X_test)
         trained_models = best_models
 
@@ -121,10 +126,11 @@ def main(args):
         # 9. 視覺化
         plot_true_vs_pred(y_test, y_pred, name, args.target_column, base_folder=base_folder)
     
-        # 10. 保存預測結果
-        # 保存預測結果
-        y_pred_df = pd.DataFrame({'y_true': y_test, f'{name}_prediction': y_pred})
-        y_pred_df.to_csv(f"{base_folder}/result/prediction/{name}_predictions.csv", index=False)
+        # 10. 存下 y_pred
+        y_pred_path = os.path.join(base_folder, f'result/prediction/{name}_predictions.csv')
+        y_pred_df = pd.DataFrame({'True': y_test, 'Predicted': y_pred})
+        y_pred_df.to_csv(y_pred_path, index=False)
+        # logging.info(f"Predictions for {name} saved to {y_pred_path}")
 
     if len(trained_models) > 1:
         logging.info(f"測試集表現最佳模型為: {best_model}")
@@ -150,7 +156,7 @@ def main(args):
                 feature_importances = getattr(model, attribute)
                 plot_feature(feature_importances, args.top_n, X_train.columns, f'{model_name}', base_folder)
 
-    print(f"預測結果已儲存至 {base_folder}/result 資料夾。")
+    print(f"預測結果已儲存至 {base_folder}/result/feature_importance 資料夾。")
 
 
 # 主程式
@@ -171,27 +177,26 @@ if __name__ == "__main__":
     # 標籤欄位(必填)
     parser.add_argument('--target_column', type=str, required=True, help='Name of the target column.')
     # 必須保留變數(處理遺失值與變數篩選時一定會保留)
-    parser.add_argument('--preserve_vars', type=str, default=None, help='一定需要留下的重要變數')
+    parser.add_argument('--preserve_vars', type=str, default=None, help='一定需要留下的重要變數 以,分隔')
     # 指定欄位畫圖(選填)
     parser.add_argument('--plot_col', type=str, default='all', help='每個欄位都畫:all, 不畫:no_draw, 指定欄位畫: 以,分隔欄位名稱')
     # 時間欄位(選填)
-    parser.add_argument('--time_column', type=str, default=None, help='時間欄位')
+    parser.add_argument('--time_column', type=str, default=None, help='時間欄位名(資料必須按照時間順序排)')
     # 資料劃分方法與劃分比例(選填)
-    # parser.add_argument('--split_method', type=str, choices=['random', 'time'], default='random', help='Method for splitting the dataset.')
     parser.add_argument('--test_size', type=float, default=0.2, help='Proportion of the dataset to include in the test split.')
     # 填補遺失值方法(選填)
     parser.add_argument('--impute_method', type=str, choices=['auto', 'mice', 'knn', 'mean'], default='auto', help='Method for imputing missing values.')
     # 正規化方法(選填)
     parser.add_argument('--normalize_method', type=str, choices=['auto', 'minmax', 'standard'], default='auto', help='Method for normalizing the data.')
     # 特徵選擇方法(選填)
-    parser.add_argument('--feature_method', type=str, choices=['auto', 'model', 'backward', 'rf', 'lasso'], default='auto', help='Method for feature selection.')
+    parser.add_argument('--feature_method', type=str, choices=['auto', 'backward+rf', 'backward', 'rf', 'lasso'], default='auto', help='Method for feature selection.')
     parser.add_argument('--sig', type=float, default=0.4, help='Backward selection significance level.')
     parser.add_argument('--rf_thr', type=float, default=0.2, help='Random Forest selection max percentage.')
     # 模型訓練(選填)
-    #  choices=['all', 'LinearRegression', 'KNN', 'SVM', 'DecisionTree', 'RandomForest', 'XGBoost', 'LightGBM', 'MLP']
     parser.add_argument('--models', type=str, default='all', help='可選: all, LinearRegression, KNN, SVM, DecisionTree, RandomForest, XGBoost, LightGBM, MLP， 以,分隔欄位名稱')
     # 特徵重要度圖的變數數量(選填)
     parser.add_argument('--top_n', type=int, default=10, help='Number of features to show in feature importance plot.')
     
     args = parser.parse_args()
     main(args)
+ 
