@@ -1,17 +1,17 @@
 # Regression Model for Multi-Task
-This program automates a wide range of data analysis tasks using a generic regression model. It streamlines the entire workflow, from data visualization and preprocessing to modeling and evaluation, making it well-suited for various regression tasks.
+A data analysis assistant designed for various regression tasks, covering the entire workflow from data visualization and preprocessing to modeling and evaluation.
 
 ## Pipeline
 ### Regression Analysis Workflow
 
-<img src="viz/flow.png" width="90%">    
+<img src="viz/flow.png" width="80%">    
 
 ---
 
 ### Integration with LLM (Optional) 
-Integrate the Regression Analysis API with an LLM and package them into an agent (Dify or LangChain). The LLM will guide you in generating a comprehensive analysis report.
+Integrate the Regression Analysis API with an LLM and package them into an agent (by Dify or LangChain). The LLM will guide you in generating a comprehensive analysis report.
 
-<img src="viz/flow2-2.png" width="90%"> 
+<img src="viz/flow2-2.png" width="80%"> 
 
 ---
 ```  
@@ -41,7 +41,7 @@ Regression Analysis
 ```
 
 ## Inference on your data
-### Run the main program directly. 
+### Run the main program directly
 ```python
 python main.py --input_file [file_dir] --target_column [taget name]
 ```
@@ -65,13 +65,14 @@ python main.py --input_file [file_dir] --target_column [taget name]
 - `--top_n` (int, optional): Number of features to display in the feature importance plot. Default is `10`.
 - `--seed` (int, optional): Set random seed for reproducible results. Default is `None`.
 
-
-## Example
+### Using Regression Analysis API
 ```
-python main.py --input_file "data/house_price.csv" --target_column price  --time_column date --preserve_vars bedrooms,view  --base_folder example/house --seed 123
+python api.py
 ```
 
-**Output File**
+
+## Output
+Provide visualizations, trained models, feature importance, prediction results, and an analysis report.
 ```
 example/house
 ├── analysis.log (Data Analysis Log)
@@ -84,11 +85,6 @@ example/house
 └── saved_model (Trained Model)
 
 ```
-### Using Regression Analysis API
-```
-python api.py
-```
-
 
 ## Using the Trained Model
 For instructions on running the program and methods, see `pred.zip`.
