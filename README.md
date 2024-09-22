@@ -8,7 +8,8 @@ This program automates a wide range of data analysis tasks using a generic regre
 
 ---
 
-**Integration with LLM**
+**Integration with LLM (Optional)**  
+LLM will assist you in generating a comprehensive analysis report.
 
 <img src="viz/flow2-2.png" width="90%"> 
 
@@ -36,7 +37,7 @@ Regression Analysis
     │   ├── train.py (Train the model)
     │   ├── eval.py (Evaluate the model)
     │   └── time.py (Time series model)
-    └── prompt.txt (Prompt for executing Dify)
+    └── prompt.txt (Prompt for GPT-4)
 ```
 
 ## How to inference on your data
