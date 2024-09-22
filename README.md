@@ -9,7 +9,7 @@ This program automates a wide range of data analysis tasks using a generic regre
 ---
 
 ### Integration with LLM (Optional) 
-Integrate the regression API with an LLM and package them into an agent (Dify or LangChain). The LLM will guide you in generating a comprehensive analysis report.
+Integrate the Regression Analysis API with an LLM and package them into an agent (Dify or LangChain). The LLM will guide you in generating a comprehensive analysis report.
 
 <img src="viz/flow2-2.png" width="90%"> 
 
