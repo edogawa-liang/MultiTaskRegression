@@ -40,7 +40,8 @@ Regression Analysis
     └── prompt.txt (Prompt for GPT-4)
 ```
 
-## How to inference on your data
+## Inference on your data
+### Run the main program directly. 
 ```python
 python main.py --input_file [file_dir] --target_column [taget name]
 ```
@@ -83,6 +84,12 @@ example/house
 └── saved_model (Trained Model)
 
 ```
+### Using Regression Analysis API
+```
+python api.py
+```
+
+
 ## Using the Trained Model
 For instructions on running the program and methods, see `pred.zip`.
 
