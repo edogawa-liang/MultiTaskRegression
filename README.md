@@ -3,25 +3,32 @@ Automate a variety of data analysis processes with a generic regression model. T
 
 ## Pipeline
 <img src="viz/flow.png" width="90%">    
-<img src="viz/flow2.png" width="90%"> 
+<img src="viz/flow2-2.png" width="90%"> 
   
 ```  
 Regression Analysis
-    ├── viz
-    │    ├── viz_pre.py (Data Visualization)
-    │    └── viz_model.py (Feature Importance, Model Prediction Density Plot)
+    ├── main.py (This script can be executed if not using the API)
+    ├── api.py (Execute this script if using the API via Dify)
+    ├── pred.zip (How to execute the model for predictions)
+    ├── data
+    ├── viz 
+    │   ├── __init__.py
+    │   ├── viz_prep.py (Data visualization)
+    │   └── viz_model.py (Feature importance, model performance density plot)
     ├── prep
-    │   ├── load.py (Data Loading)
-    │   ├── split.py (Data Splitting)
-    │   ├── cat.py (Categorical Variable Processing)
-    │   ├── miss.py (Missing Value Handling)
+    │   ├── __init__.py
+    │   ├── load.py (Import files .xlsx .csv)
+    │   ├── split.py (Split datasets)
+    │   ├── cat.py (Handle categorical variables)
+    │   ├── miss.py (Handle missing values)
     │   ├── norm.py (Normalization)
-    │   └── feat_sel.py (Feature Selection)
-    └── model
-        ├── train.py (Model Training)
-        ├── eval.py (Model Evaluation)
-        └── time.py (Time Series Model sklearn Interface)
-
+    │   └── feat_sel.py (Feature selection)
+    ├── model
+    │   ├── __init__.py
+    │   ├── train.py (Train the model)
+    │   ├── eval.py (Evaluate the model)
+    │   └── time.py (Time series model)
+    └── prompt.txt (Prompt for executing Dify)
 ```
 
 ## How to inference on your data
@@ -66,6 +73,8 @@ example/house
 └── saved_model (Trained Model)
 
 ```
+## Using the Trained Model
+For instructions on running the program and methods, see `pred.zip`.
 
 ## Notice
 - Please ensure that the dataset does not contain columns with index information.
